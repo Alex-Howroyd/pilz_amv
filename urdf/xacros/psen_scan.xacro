@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="pilz_amv">
+  <xacro:macro name="psen_scan" params="prefix parent *origin ros_topic">
+    <link name="${prefix}" type="laser">
+      <visual>
+        <origin xyz="-0.01 0 0.09" rpy="3.14 0 3.14"/>
+        <geometry>
+          <mesh filename="package://pilz_amv/urdf/meshes/psen_scan.dae" scale="0.001 0.001 0.001" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="-0.01 0 0.09" rpy="3.14 0 3.14"/>
+        <geometry>
+          <mesh filename="package://pilz_amv/urdf/meshes/psen_scan.dae" scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}_joint" type="fixed">
+      <axis xyz="0 1 0" />
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}"/>
+      <child link="${prefix}"/>
+    </joint>
+  </xacro:macro>
+</robot>

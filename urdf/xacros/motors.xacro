@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="pilz_amv">
+  <xacro:macro name="motors" params="name parent *origin">
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="1.57 0 1.57"/>
+        <geometry>
+          <mesh filename="package://pilz_amv/urdf/meshes/motors.dae" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="1.57 0 1.57"/>
+        <geometry>
+          <mesh filename="package://pilz_amv/urdf/meshes/motors.dae" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${name}_joint" type="fixed">
+      <xacro:insert_block name="origin" />
+      <axis xyz="0 0 -1" />
+      <joint_properties damping="1" friction="1" />
+      <parent link="${parent}" />
+      <child link="${name}_link" />
+    </joint>
+  </xacro:macro>
+</robot>
